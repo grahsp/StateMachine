@@ -27,12 +27,15 @@ public class StateMachineBuilder<TContext> where TContext : class
 		return this;
 	}
 
-	public StateMachine<TContext> Build()
+	public StateMachine<TContext> Build(TContext context)
 	{
 		var state = _initialState ?? _states.FirstOrDefault();
 		if (state == null)
 			throw new InvalidOperationException("Cannot build without states!");
 		
-		return new StateMachine<TContext>(state);
+		var fsm = new StateMachine<TContext>(state);
+		fsm.CurrentState.OnEnter(context);
+		
+		return fsm;
 	}
 }
