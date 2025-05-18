@@ -25,15 +25,6 @@ public class StateMachine<TContext> where TContext : class
 	}
 }
 
-public class Transition<TContext>
-	(State<TContext> source, State<TContext> target, Func<TContext, bool> condition)
-	where TContext : class
-{
-	public State<TContext> Source { get; } = source;
-	public State<TContext> Target { get; } = target;
-	public Func<TContext, bool> Condition { get; } = condition;
-}
-
 public interface IState<in TContext> where TContext : class
 {
 	void OnEnter(TContext context);
