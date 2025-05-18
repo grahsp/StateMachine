@@ -34,18 +34,6 @@ public class Transition<TContext>
 	public Func<TContext, bool> Condition { get; } = condition;
 }
 
-public abstract class State<TContext> : IState<TContext> where TContext : class
-{
-	internal readonly List<Transition<TContext>> Transitions = [];
-
-	internal void AddTransition(State<TContext> target, Func<TContext, bool> condition)
-		=> Transitions.Add(new Transition<TContext>(this, target, condition));
-
-	public virtual void OnEnter(TContext context) { }
-	public virtual void OnExit(TContext context) { }
-	public virtual void OnUpdate(TContext context) { }
-}
-
 public interface IState<in TContext> where TContext : class
 {
 	void OnEnter(TContext context);
