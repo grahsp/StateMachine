@@ -24,10 +24,3 @@ public class StateMachine<TContext> where TContext : class
 		CurrentState.OnEnter(context);
 	}
 }
-
-public interface IState<in TContext> where TContext : class
-{
-	void OnEnter(TContext context);
-	void OnExit(TContext context);
-	void OnUpdate(TContext context);
-}
